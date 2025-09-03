@@ -13,6 +13,7 @@ import { beforeSyncWithSearch } from '@/search/beforeSync'
 
 import { Page, Post } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
+import { openapi, redoc, scalar } from 'payload-oapi'
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   return doc?.title ? `${doc.title} | Payload Website Template` : 'Payload Website Template'
@@ -25,6 +26,8 @@ const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
 }
 
 export const plugins: Plugin[] = [
+  openapi({ openapiVersion: '3.0', metadata: { title: 'Dev API', version: '0.0.1' } }),
+  scalar({}),
   redirectsPlugin({
     collections: ['pages', 'posts'],
     overrides: {
