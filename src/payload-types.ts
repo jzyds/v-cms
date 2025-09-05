@@ -73,6 +73,7 @@ export interface Config {
     categories: Category;
     users: User;
     articles: Article;
+    topic: Topic;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -90,6 +91,7 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
+    topic: TopicSelect<false> | TopicSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -751,6 +753,18 @@ export interface Article {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "topic".
+ */
+export interface Topic {
+  id: number;
+  input: string;
+  type: 'rewriter' | 'intruducer' | 'content_generator';
+  published: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -945,6 +959,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'articles';
         value: number | Article;
+      } | null)
+    | ({
+        relationTo: 'topic';
+        value: number | Topic;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1319,6 +1337,17 @@ export interface ArticlesSelect<T extends boolean = true> {
   markdown?: T;
   slug?: T;
   slugLock?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "topic_select".
+ */
+export interface TopicSelect<T extends boolean = true> {
+  input?: T;
+  type?: T;
+  published?: T;
   updatedAt?: T;
   createdAt?: T;
 }
