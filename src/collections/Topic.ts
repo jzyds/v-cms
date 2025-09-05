@@ -9,7 +9,7 @@ export const Topic: CollectionConfig = {
     create: anyone,
     delete: authenticated,
     read: anyone,
-    update: authenticated,
+    update: anyone,
   },
   admin: {
     useAsTitle: 'input',
