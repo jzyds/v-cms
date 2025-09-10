@@ -86,7 +86,7 @@ export const Topic: CollectionConfig = {
       },
     },
     {
-      path: '/create-if-not-exists',
+      path: '/create-if-not-exists/single',
       method: 'post',
       handler: async (req) => {
         // https://payloadcms.com/docs/rest-api/overview
@@ -112,7 +112,7 @@ export const Topic: CollectionConfig = {
       },
     },
     {
-      path: '/create-if-not-exists-batch',
+      path: '/create-if-not-exists/batch',
       method: 'post',
       handler: async (req) => {
         if (!req.json) {
