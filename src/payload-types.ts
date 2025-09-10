@@ -74,6 +74,7 @@ export interface Config {
     users: User;
     articles: Article;
     topic: Topic;
+    note: Note;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -92,6 +93,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
     topic: TopicSelect<false> | TopicSelect<true>;
+    note: NoteSelect<false> | NoteSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -765,6 +767,27 @@ export interface Topic {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "note".
+ */
+export interface Note {
+  id: number;
+  topic: string;
+  title: string;
+  content_json?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  published: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -963,6 +986,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'topic';
         value: number | Topic;
+      } | null)
+    | ({
+        relationTo: 'note';
+        value: number | Note;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1347,6 +1374,18 @@ export interface ArticlesSelect<T extends boolean = true> {
 export interface TopicSelect<T extends boolean = true> {
   input?: T;
   type?: T;
+  published?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "note_select".
+ */
+export interface NoteSelect<T extends boolean = true> {
+  topic?: T;
+  title?: T;
+  content_json?: T;
   published?: T;
   updatedAt?: T;
   createdAt?: T;
