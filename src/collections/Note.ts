@@ -13,6 +13,9 @@ export const Note: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
+    preview: (data, { req }) => {
+      return `/note/${data.id}`
+    },
   },
   fields: [
     {
