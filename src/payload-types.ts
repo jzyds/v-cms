@@ -760,7 +760,7 @@ export interface Article {
 export interface Topic {
   id: number;
   input: string;
-  type: 'rewriter' | 'intruducer' | 'content_generator';
+  type: 'rewriter' | 'intruducer' | 'content_generator' | 'translator';
   published: number;
   updatedAt: string;
   createdAt: string;
