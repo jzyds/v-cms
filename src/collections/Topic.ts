@@ -56,8 +56,10 @@ export const Topic: CollectionConfig = {
     {
       name: 'type',
       type: 'select',
-      // rewriter 不带原始链接， intruducer 带原始链接， content_generator 新创造内容
-      options: ['rewriter', 'intruducer', 'content_generator'],
+      // rewriter 不带原始链接，
+      // intruducer / translator 带原始链接，
+      // content_generator 新创造内容
+      options: ['rewriter', 'intruducer', 'content_generator', 'translator'],
       required: true,
     },
     {
