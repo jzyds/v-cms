@@ -3,6 +3,9 @@ import React, { cache } from 'react'
 import configPromise from '@payload-config'
 import NoteContent from '@/components/NoteContent'
 import ClientWrapper from '@/components/NoteContent/ClientWrapper'
+import HtmlViewer from '@/components/NoteContent/HtmlViewer'
+import JsonViewer from '@/components/NoteContent/JsonViewer'
+import Tabs from '@/components/ui/tabs'
 
 interface NoteContentData {
   title: string
@@ -73,11 +76,33 @@ export default async function Page({ params: paramsPromise }: Args) {
     return <div>Invalid content format</div>
   }
 
+  const tabs = [
+    {
+      id: 'styled',
+      label: '样式预览',
+      content: (
+        <ClientWrapper>
+          <NoteContent content={note.content_json} />
+        </ClientWrapper>
+      ),
+    },
+    {
+      id: 'html',
+      label: '纯HTML',
+      content: <HtmlViewer content={note.content_json} />,
+    },
+    {
+      id: 'json',
+      label: 'JSON数据',
+      content: <JsonViewer content={note.content_json} />,
+    },
+  ]
+
   return (
     <div className="min-h-screen bg-gray-50 py-8">
-      <ClientWrapper>
-        <NoteContent content={note.content_json} />
-      </ClientWrapper>
+      <div className="max-w-6xl mx-auto px-4">
+        <Tabs tabs={tabs} defaultTab="styled" />
+      </div>
     </div>
   )
 }
