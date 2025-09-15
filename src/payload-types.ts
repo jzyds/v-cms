@@ -75,6 +75,7 @@ export interface Config {
     articles: Article;
     topic: Topic;
     note: Note;
+    'wine-stock': WineStock;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -94,6 +95,7 @@ export interface Config {
     articles: ArticlesSelect<false> | ArticlesSelect<true>;
     topic: TopicSelect<false> | TopicSelect<true>;
     note: NoteSelect<false> | NoteSelect<true>;
+    'wine-stock': WineStockSelect<false> | WineStockSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -788,6 +790,64 @@ export interface Note {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "wine-stock".
+ */
+export interface WineStock {
+  id: number;
+  SKU: string;
+  quantity: number;
+  'purchase-price': number;
+  categories:
+    | '白酒'
+    | '威士忌'
+    | '葡萄酒'
+    | '啤酒'
+    | '黄酒'
+    | '米酒'
+    | '伏特加'
+    | '朗姆酒'
+    | '龙舌兰'
+    | '金酒'
+    | '白兰地'
+    | '清酒'
+    | '烧酒'
+    | '果酒'
+    | '利口酒'
+    | '苦艾酒';
+  'alcohol-content': number;
+  volume: number;
+  'procudtion-year': number;
+  'liquor-flavor'?:
+    | (
+        | '酱香型'
+        | '浓香型'
+        | '清香型'
+        | '米香型'
+        | '凤香型'
+        | '芝麻香型'
+        | '豉香型'
+        | '特香型'
+        | '老白干香型'
+        | '兼香型'
+        | '药香型'
+        | '馥郁香型'
+      )
+    | null;
+  image?: (number | Media)[] | null;
+  'purchase-source'?: string | null;
+  'purchase-date'?: string | null;
+  remarks?: string | null;
+  'tasting-notes'?: string | null;
+  'food-pairings'?: string | null;
+  'expiry-date'?: string | null;
+  brand?: string | null;
+  'grape-variety'?: string | null;
+  region?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -990,6 +1050,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'note';
         value: number | Note;
+      } | null)
+    | ({
+        relationTo: 'wine-stock';
+        value: number | WineStock;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1387,6 +1451,32 @@ export interface NoteSelect<T extends boolean = true> {
   title?: T;
   content_json?: T;
   published?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "wine-stock_select".
+ */
+export interface WineStockSelect<T extends boolean = true> {
+  SKU?: T;
+  quantity?: T;
+  'purchase-price'?: T;
+  categories?: T;
+  'alcohol-content'?: T;
+  volume?: T;
+  'procudtion-year'?: T;
+  'liquor-flavor'?: T;
+  image?: T;
+  'purchase-source'?: T;
+  'purchase-date'?: T;
+  remarks?: T;
+  'tasting-notes'?: T;
+  'food-pairings'?: T;
+  'expiry-date'?: T;
+  brand?: T;
+  'grape-variety'?: T;
+  region?: T;
   updatedAt?: T;
   createdAt?: T;
 }
