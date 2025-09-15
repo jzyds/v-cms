@@ -26,7 +26,7 @@ export const WineStock: CollectionConfig = {
     },
     {
       name: 'purchase-price', // 进货价
-      label: 'Purchase Price (in CNY)',
+      label: 'Purchase Price (in CNY) / bottle',
       type: 'number',
       required: true,
     },
